@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#13111A">
+<title>Campaign HQ</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<!-- Shared code + styles load from the personal app's repo (same site = shared data/login) -->
+<link rel="stylesheet" href="/slipstream/styles.css">
+<script>window.SLIPSTREAM_MODE = 'campaign';</script>
+</head>
+<body class="campaign-mode">
+  <header class="topbar">
+    <div class="brand" data-action="go-home">
+      <svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M12 2 L14.6 8.6 L21.6 9 L16.2 13.5 L18 20.3 L12 16.5 L6 20.3 L7.8 13.5 L2.4 9 L9.4 8.6 Z" fill="currentColor" stroke="none"/>
+      </svg>
+      <span>Campaign HQ</span>
+    </div>
+    <div class="topbar-right">
+      <button class="sync-pill" id="syncPill" data-action="sync-now" title="Sync now">
+        <span class="sync-dot" id="syncDot"></span><span id="syncLabel">local</span>
+      </button>
+      <button class="icon-btn" data-action="open-settings" aria-label="Settings">⚙️</button>
+    </div>
+  </header>
+
+  <main id="view" class="view"></main>
+
+  <nav class="bottomnav scroll" id="bottomnav"></nav>
+
+  <div id="toast" class="toast" hidden>
+    <span id="toastMsg"></span>
+    <button id="toastBtn" class="toast-btn" hidden></button>
+  </div>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dlg">
+      <h2>Settings</h2>
+      <label>Your name <input type="text" id="setName" placeholder="What should I call you?"></label>
+      <h3>GitHub sync</h3>
+      <p class="hint">Shares the same data + login as your personal Slipstream app. If this shows "local", paste your token here too.</p>
+      <label>GitHub username <input type="text" id="setOwner" autocapitalize="off" autocomplete="off" placeholder="e.g. kateroo832"></label>
+      <label>Data repo name <input type="text" id="setRepo" autocapitalize="off" autocomplete="off" placeholder="slipstream-data"></label>
+      <label>Branch <input type="text" id="setBranch" autocapitalize="off" autocomplete="off" placeholder="main"></label>
+      <label>Access token <input type="password" id="setToken" autocomplete="off" placeholder="github_pat_…"></label>
+      <p class="hint">The token is stored only on this device.</p>
+      <div class="dlg-row">
+        <button value="cancel" class="btn ghost">Cancel</button>
+        <button value="save" class="btn primary" id="settingsSave">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="newListDialog">
+    <form method="dialog" class="dlg">
+      <h2>New workstream list</h2>
+      <label>Name <input type="text" id="nlTitle" placeholder="e.g. Press &amp; Comms"></label>
+      <label>Emoji <input type="text" id="nlEmoji" value="🗳️" maxlength="4"></label>
+      <label>Type
+        <select id="nlType">
+          <option value="project">Project (sections &amp; phases)</option>
+          <option value="simple">Simple checklist</option>
+          <option value="recurring">Recurring (chores that reschedule)</option>
+          <option value="trip">Trip countdown</option>
+        </select>
+      </label>
+      <label id="nlDepartureWrap" hidden>Departure date <input type="date" id="nlDeparture"></label>
+      <div class="dlg-row">
+        <button value="cancel" class="btn ghost">Cancel</button>
+        <button value="create" class="btn primary" id="nlCreate">Create</button>
+      </div>
+    </form>
+  </dialog>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="/slipstream/confetti.js"></script>
+  <script src="/slipstream/moves.js"></script>
+  <script src="/slipstream/sync.js"></script>
+  <script src="/slipstream/app.js"></script>
+</body>
+</html>
