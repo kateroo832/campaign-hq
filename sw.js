@@ -1,6 +1,6 @@
 /* Campaign HQ service worker. Scope /campaign-hq/. Precaches the local shell +
  * the shared code served from /slipstream/ so the app loads offline. */
-const CACHE = 'campaign-hq-v3';
+const CACHE = 'campaign-hq-v4';
 const SHELL = [
   './',
   'index.html',
@@ -31,7 +31,7 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;
   e.respondWith(
-    fetch(e.request)
+    fetch(e.request, { cache: 'no-cache' }) // always revalidate code with the server so updates land in one reopen
       .then(res => {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(e.request, copy));
