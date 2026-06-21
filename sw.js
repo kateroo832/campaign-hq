@@ -1,6 +1,6 @@
 /* Campaign HQ service worker. Scope /campaign-hq/. Precaches the local shell +
  * the shared code served from /slipstream/ so the app loads offline. */
-const CACHE = 'campaign-hq-v4';
+const CACHE = 'campaign-hq-v5';
 const SHELL = [
   './',
   'index.html',
